@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">PhunwareWeather</string>
+    <string name="add">ADD</string>
+    <string name="zipcodeinputhint">Enter the zip-code</string>
+    <string name="placename">Location : </string>
+    <string name="description">Description : </string>
+    <string name="tempinc">Temp(C) : </string>
+    <string name="lastupdatedon">Last updated on : </string>
+
+</resources>
