@@ -3,13 +3,12 @@ package com.weather.phunware.activities;
 import android.app.Activity;
 
 import android.os.Bundle;
-import android.widget.Toast;
+
 
 import com.weather.phunware.fragments.SearchandDetailWeatherFragment;
-import com.weather.phunware.fragments.ZipCodeListFragment;
 
 public class SearchandDetailWeatherActivity extends Activity {
-    Bundle bundle=null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

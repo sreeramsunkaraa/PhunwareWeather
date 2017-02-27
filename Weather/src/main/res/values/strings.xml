@@ -6,5 +6,8 @@
     <string name="description">Description : </string>
     <string name="tempinc">Temp(C) : </string>
     <string name="lastupdatedon">Last updated on : </string>
+    <string name="nomoredeletion">Reached the limit to delete</string>
+    <string name="fetching">Fetching Data</string>
+    <string name="loading">Loading...</string>
 
 </resources>

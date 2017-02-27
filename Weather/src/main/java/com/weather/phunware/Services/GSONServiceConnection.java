@@ -1,11 +1,9 @@
-package com.weather.phunware.Services;
+package com.weather.phunware.services;
 
-import android.os.AsyncTask;
-import android.util.Log;
+import android.content.Context;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonObject;
-import com.weather.phunware.BusinessObjects.WeatherAPIResponse;
+import com.weather.phunware.businessobjects.WeatherAPIResponse;
 import com.weather.phunware.constants.PhunwareWeatherConstants;
 
 import java.io.IOException;
@@ -20,27 +18,34 @@ import java.net.URL;
 
 public class GSONServiceConnection {
 
+    PhunwareWeatherConstants constants;
 
-
-    public static String URLformed(String zipcode)
+    public GSONServiceConnection()
     {
-        return PhunwareWeatherConstants.URL_PART1+""+zipcode+""+PhunwareWeatherConstants.URL_PART2;
+        constants=new PhunwareWeatherConstants();
     }
 
-    public static WeatherAPIResponse fetchTheResponse(String zipcode)
+    public String URLformed(String zipcode)
+    {
+        constants=new PhunwareWeatherConstants();
+        return constants.URL_PART1+""+zipcode+""+constants.URL_PART2;
+    }
+
+    public WeatherAPIResponse fetchTheResponse(String zipcode)
     {
 
         try {
             URL url=new URL(URLformed(zipcode));
             Reader readdata=new InputStreamReader(url.openStream());
-
             WeatherAPIResponse weatherReport=new Gson().fromJson(readdata,WeatherAPIResponse.class);
-
+            constants.ERROR_DISPAY=0;
             return weatherReport;
         } catch (MalformedURLException e) {
             e.printStackTrace();
+            constants.ERROR_DISPAY= constants.ERROR_UNEXPECTED;
         } catch (IOException e) {
             e.printStackTrace();
+            constants.ERROR_DISPAY=constants.ERROR_SERVICE_PROBLEM;
         }
 
        return null;

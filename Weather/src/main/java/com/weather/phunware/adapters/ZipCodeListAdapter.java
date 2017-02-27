@@ -2,7 +2,6 @@ package com.weather.phunware.adapters;
 
 
 import android.content.Context;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +12,10 @@ import android.widget.Toast;
 
 import com.weather.phunware.activities.R;
 import com.weather.phunware.constants.PhunwareWeatherConstants;
-import com.weather.phunware.fragments.ZipCodeListFragment;
+import com.weather.phunware.methods.ReusableMethods;
+
+import java.util.ArrayList;
+
 
 class Holder
 {
@@ -22,19 +24,25 @@ class Holder
 }
 public class ZipCodeListAdapter extends BaseAdapter {
 
-    Holder holder;
-    LayoutInflater layoutInflater;
-    Context context;
+
+    private LayoutInflater layoutInflater;
+    private Context context;
+    private PhunwareWeatherConstants constants;
+    private Holder holder;
+    private ReusableMethods methods;
+    private ArrayList<String> columnName=new ArrayList<>();
+    private ArrayList<String> columnValue=new ArrayList<>();
 
     public ZipCodeListAdapter(Context context)
     {
-        layoutInflater=(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         this.context=context;
+        methods=new ReusableMethods(context);
+        constants=new PhunwareWeatherConstants();
+        layoutInflater=(LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
     }
     @Override
     public int getCount() {
-        return ZipCodeListFragment.cursor.getCount();
-        //return 10;
+        return constants.cursor.getCount();
     }
 
     @Override
@@ -50,6 +58,8 @@ public class ZipCodeListAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
 
+
+
         if(convertView==null)
         {
             convertView=layoutInflater.inflate(R.layout.item_zipcodes,parent,false);
@@ -62,29 +72,29 @@ public class ZipCodeListAdapter extends BaseAdapter {
         {
             holder=(Holder)convertView.getTag();
         }
-        ZipCodeListFragment.cursor.moveToPosition(position);
-        holder.tvZipcodeItem.setText(ZipCodeListFragment.cursor.getString(0));
+
+        constants.cursor.moveToPosition(position);
+        holder.tvZipcodeItem.setText(constants.cursor.getString(0));
 
         holder.ivDelete.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(ZipCodeListFragment.cursor.getCount()>3) {
-                    ZipCodeListFragment.cursor.moveToPosition(position);
-                    ZIpCodeSqliteAdapter dataBaseAdapter = new ZIpCodeSqliteAdapter(context.getApplicationContext(), PhunwareWeatherConstants.DB_NAME, null, PhunwareWeatherConstants.DB_VERSION);
-
-                    dataBaseAdapter.DELETE(context.getApplicationContext(), PhunwareWeatherConstants.TABLE_NAME, PhunwareWeatherConstants.COLUMN_NAME_ZIP + "='" + ZipCodeListFragment.cursor.getString(0) + "'");
-                    ZipCodeListFragment.cursor = dataBaseAdapter.SELECT(context.getApplicationContext(), PhunwareWeatherConstants.TABLE_NAME, PhunwareWeatherConstants.COLUMN_NAME_ZIP);
-
-                    notifyDataSetChanged();
+                if(constants.cursor.getCount()>constants.MINIMUM_ZIPCODES) {
+                    constants.cursor.moveToPosition(position);
+                    columnName.add(constants.COLUMN_NAME_ZIP);
+                    columnValue.add(constants.cursor.getString(0));
+                    methods.deleteZipCodeFromDB(columnName,columnValue);
                     notifyDataSetInvalidated();
+                    notifyDataSetChanged();
                 }
                 else
                 {
-                    Toast.makeText(context.getApplicationContext(),"Minimum three to delete",Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context.getApplicationContext(),R.string.nomoredeletion,Toast.LENGTH_SHORT).show();
                 }
             }
         });
 
         return convertView;
     }
+
 }

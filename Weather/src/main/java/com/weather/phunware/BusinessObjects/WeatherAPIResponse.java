@@ -1,4 +1,4 @@
-package com.weather.phunware.BusinessObjects;
+package com.weather.phunware.businessobjects;
 
 import com.weather.phunware.constants.PhunwareWeatherConstants;
 
@@ -19,15 +19,11 @@ public class WeatherAPIResponse {
         float temp;
     }
 
-
     public String name;
 
     List<Weather> weather;
 
     Main main;
-
-
-
 
     public String getTemperatureInCelsius() {
         float temp = main.temp - 273.15f;
@@ -35,7 +31,8 @@ public class WeatherAPIResponse {
     }
 
     public String getIconAddress() {
-        return PhunwareWeatherConstants.ICON_ADDR + weather.get(0).icon + ".png";
+        PhunwareWeatherConstants constants=new PhunwareWeatherConstants();
+        return constants.ICON_ADDR + weather.get(0).icon + ".png";
     }
 
     public String getDescription() {
@@ -43,9 +40,5 @@ public class WeatherAPIResponse {
             return weather.get(0).description;
         return null;
     }
-
-
-
-
 
 }
