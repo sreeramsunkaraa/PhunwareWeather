@@ -37,6 +37,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
+/**
+ * Created by Sreeram on 2/26/17.
+ *
+ * Fragment to display various details about weather on zip code search
+ */
 public class SearchandDetailWeatherFragment extends Fragment {
 
     @BindView(R.id.ivRefresh)
@@ -85,6 +90,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
     ArrayList<String> columnValue=new ArrayList<>();
     ArrayList<String> columnQuote=new ArrayList<>();
 
+    //object initialization
     public SearchandDetailWeatherFragment()
     {
         constants=new PhunwareWeatherConstants();
@@ -133,6 +139,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         return view;
     }
 
+    //When user clicks on refresh button the screen for new weather report
     @OnClick(R.id.ivRefresh)
     public void refreshTemp()
     {
@@ -141,7 +148,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         searchZipCode();
     }
 
-
+    //When user enter 5 digit zipcode in the search area - fetches the data
     private void searchZipCode()
     {
         resetView();
@@ -151,6 +158,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
 
     }
 
+    //When refreshed or new search - resetting the view
     private void resetView()
     {
         tvPlaceName.setText(getString(R.string.placename));
@@ -159,6 +167,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         tvLastUpdatedOn.setText(getString(R.string.lastupdatedon));
     }
 
+    //Hide the keyboard when search is going on
     private void keyBoardHide(View view)
     {
         InputMethodManager imm=(InputMethodManager)getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -166,7 +175,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
     }
 
 
-
+   //Service call for every three minutes - before three muniutes data shown from cache
     private boolean forceServiceCall()
     {
         if(oldDate!=null) {
@@ -186,6 +195,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         return false;
     }
 
+    //Retrieve cache data
     private void getLastUpdatedDate(Cursor cursor)
     {
         if(cursor!=null) {
@@ -194,6 +204,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         }
     }
 
+    //To show error messages when there is a problem with service call
     private void showAlertDialogs()
     {
         AlertDialog.Builder alertbuilder=new AlertDialog.Builder(getActivity());
@@ -218,6 +229,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         }
     }
 
+    //Update weather data on screen
     private void appendDataToView(WeatherAPIResponse weatherAPIResponse)
     {
         tvDescription.append(weatherAPIResponse.getDescription());
@@ -230,6 +242,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         tvLastUpdatedOn.append(newDate.toString());
     }
 
+    //Creating array list for inserting to table
     private void insertIntoTable()
     {
         columnName.add(ZIPCODE);
@@ -246,7 +259,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         columnQuote.add("Y");
         columnQuote.add("Y");
     }
-
+    //Creating array list for updating to table
     private void updateToTable()
     {
         columnName.add(constants.COLUMN_NAME_ZIP);
@@ -271,6 +284,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         columnQuote.add("Y");
     }
 
+    //Clear the arraylist for next time use
     private void clearArrayList()
     {
         columnValue.clear();
@@ -278,6 +292,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
         columnQuote.clear();
     }
 
+    //Updating screen based on cache information
     private void appendDataFromCursor(Cursor cursor)
     {
         cursor.moveToFirst();
@@ -290,6 +305,7 @@ public class SearchandDetailWeatherFragment extends Fragment {
 
     }
 
+    //Service call for fetching data or if available on cache, database call for fetching data
     public class FetchResponse extends AsyncTask<Void,Void,Void>
     {
         @Override

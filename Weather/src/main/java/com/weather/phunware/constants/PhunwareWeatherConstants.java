@@ -3,6 +3,11 @@ package com.weather.phunware.constants;
 
 import android.database.Cursor;
 
+/**
+ * Created by Sreeram on 2/26/17.
+ *
+ * Various constants that are used inside the project
+ */
 public class PhunwareWeatherConstants {
 
 

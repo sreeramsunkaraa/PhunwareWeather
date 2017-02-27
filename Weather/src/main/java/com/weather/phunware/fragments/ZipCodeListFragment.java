@@ -23,7 +23,11 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 
-
+/**
+        * Created by Sreeram on 2/26/17.
+        *
+        * Fragment to display zip code list
+        */
 
 public class ZipCodeListFragment extends Fragment {
 
@@ -37,6 +41,7 @@ public class ZipCodeListFragment extends Fragment {
     PhunwareWeatherConstants constants;
     ReusableMethods methods;
 
+    //Object Initialization
     public ZipCodeListFragment() {
         constants=new PhunwareWeatherConstants();
         methods=new ReusableMethods(getActivity());
@@ -74,7 +79,7 @@ public class ZipCodeListFragment extends Fragment {
 
     }
 
-
+    //Fetch the zipcode list from SQLite to show on the screen
     public class ZipCodeFetchFromDB extends AsyncTask<Void,Void,Void> {
 
 
@@ -96,7 +101,7 @@ public class ZipCodeListFragment extends Fragment {
             constants.cursor = dataBaseAdapter.SELECT(getActivity().getApplicationContext(), constants.TABLE_NAME, constants.COLUMN_NAME_ZIP);
                 if(constants.cursor.getCount()<constants.MINIMUM_ZIPCODES)
                 {
-                    dataBaseAdapter.INSERT(getActivity().getApplicationContext(), constants.TABLE_NAME,"60115,'2000-01-01 01:01:01 AM','','','',''), (60116,'2000-01-01 01:01:01 AM','','','',''), (60117,'2000-01-01 01:01:01 AM','','','',''");
+                    dataBaseAdapter.INSERT(getActivity().getApplicationContext(), constants.TABLE_NAME,"78757,'2000-01-01 01:01:01 AM','','','',''), (92660,'2000-01-01 01:01:01 AM','','','',''), (33137,'2000-01-01 01:01:01 AM','','','',''");
                     constants.cursor = dataBaseAdapter.SELECT(getActivity().getApplicationContext(), constants.TABLE_NAME, constants.COLUMN_NAME_ZIP);
 
                 }

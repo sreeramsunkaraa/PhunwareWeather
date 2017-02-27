@@ -15,7 +15,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 
 /**
- * Created by apple on 2/26/17.
+ * Created by Sreeram on 2/26/17.
+ *
+ * Methods for reusing in the applciation
  */
 
 public class ReusableMethods {
@@ -34,7 +36,7 @@ public class ReusableMethods {
         dataBaseAdapter= new ZIpCodeSqliteAdapter(context, constants.DB_NAME, null, constants.DB_VERSION);
     }
 
-
+    //Creating database
     public void createDatabase()
     {   try {
             dataBaseAdapter.createDataBase();
@@ -44,6 +46,7 @@ public class ReusableMethods {
         dataBaseAdapter.CREATE(context, constants.TABLE_NAME, constants.COLUMN_NAME_INSERT);
     }
 
+    //delete zip code from the db
     public  void deleteZipCodeFromDB(ArrayList<String> columnName, ArrayList<String> columnValue)
     {
         dataBaseAdapter.DELETE(context, constants.TABLE_NAME,whereCondition(columnName,columnValue) );
@@ -52,7 +55,7 @@ public class ReusableMethods {
         columnValue.clear();
     }
 
-
+    //creating argument list for writing where condition in SQLite
     public String whereCondition(ArrayList<String> columnName,ArrayList<String> columnValue)
     {
         String condition="";
@@ -73,7 +76,7 @@ public class ReusableMethods {
         return condition;
     }
 
-
+    //formating text with single quotation
     public String insertSingleQuote(ArrayList<String> columnName,ArrayList<String> columnQuote)
     {
         String condition="";
@@ -104,6 +107,7 @@ public class ReusableMethods {
         return condition;
     }
 
+    //formating text with column name and single quotation
     public String createUpdateArgs(ArrayList<String> columnName,ArrayList<String> columnValue,ArrayList<String> columnQuote)
     {
         String condition="";
@@ -137,6 +141,8 @@ public class ReusableMethods {
 
         return condition;
     }
+
+    //Error message for the network situations
     public String errorMessage(int errorCode)
     {
         if(errorCode==constants.ERROR_SERVICE_PROBLEM)

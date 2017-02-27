@@ -12,7 +12,11 @@ import android.util.Log;
 
 import com.weather.phunware.constants.PhunwareWeatherConstants;
 
-
+/**
+ * Created by Sreeram on 2/26/17.
+ *
+ * Class for opening SQLite and has the methods to access the tables inside
+ */
 
 public class ZIpCodeSqliteAdapter extends SQLiteOpenHelper{
 

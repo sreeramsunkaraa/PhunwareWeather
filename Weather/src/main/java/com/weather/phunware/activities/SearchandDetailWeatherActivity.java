@@ -7,6 +7,12 @@ import android.os.Bundle;
 
 import com.weather.phunware.fragments.SearchandDetailWeatherFragment;
 
+/**
+ * Created by Sreeram on 2/26/17.
+ *
+ * This is the activity for setting fragment for search new zipcode
+ */
+
 public class SearchandDetailWeatherActivity extends Activity {
 
     @Override

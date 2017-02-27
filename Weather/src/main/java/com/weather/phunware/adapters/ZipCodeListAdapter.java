@@ -16,12 +16,18 @@ import com.weather.phunware.methods.ReusableMethods;
 
 import java.util.ArrayList;
 
+/**
+ * Created by Sreeram on 2/26/17.
+ */
 
+//View Holder for list view items
 class Holder
 {
     TextView tvZipcodeItem;
     ImageView ivDelete;
 }
+
+//Customized adapter for setting the items to ListView
 public class ZipCodeListAdapter extends BaseAdapter {
 
 
