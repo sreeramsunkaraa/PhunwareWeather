@@ -5,7 +5,9 @@ import com.weather.phunware.constants.PhunwareWeatherConstants;
 import java.util.List;
 
 /**
- * Created by apple on 2/24/17.
+ * Created by Sreeram on 2/26/17.
+ *
+ * To describe the structure of the JSON response
  */
 
 public class WeatherAPIResponse {

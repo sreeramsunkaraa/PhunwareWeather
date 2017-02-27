@@ -95,7 +95,7 @@ public class ZipCodeListAdapter extends BaseAdapter {
                 }
                 else
                 {
-                    Toast.makeText(context.getApplicationContext(),R.string.nomoredeletion,Toast.LENGTH_SHORT).show();
+                    Toast.makeText(context.getApplicationContext(),context.getString(R.string.nomoredeletion),Toast.LENGTH_SHORT).show();
                 }
             }
         });

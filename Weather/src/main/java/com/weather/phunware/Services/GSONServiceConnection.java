@@ -13,7 +13,9 @@ import java.net.MalformedURLException;
 import java.net.URL;
 
 /**
- * Created by apple on 2/24/17.
+ * Created by Sreeram on 2/26/17.
+ *
+ * This class is used for getting JSON data from Open Weather MAP
  */
 
 public class GSONServiceConnection {
@@ -25,12 +27,14 @@ public class GSONServiceConnection {
         constants=new PhunwareWeatherConstants();
     }
 
+    //This method is for framing the URL
     public String URLformed(String zipcode)
     {
         constants=new PhunwareWeatherConstants();
         return constants.URL_PART1+""+zipcode+""+constants.URL_PART2;
     }
 
+    //This method is to get the JSON data from Weather API
     public WeatherAPIResponse fetchTheResponse(String zipcode)
     {
 
